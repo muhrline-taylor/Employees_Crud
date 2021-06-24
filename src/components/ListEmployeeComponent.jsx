@@ -9,7 +9,9 @@ export default class ListEmployeeComponent extends Component {
             employees: [],
         }
 
-        this.addEmployee = this.addEmployee.bind(this)
+        this.addEmployee = this.addEmployee.bind(this);
+        this.editEmployee = this.editEmployee.bind(this);
+        this.deleteEmployee = this.deleteEmployee.bind(this);
     }
 
     componentDidUpdate(){
@@ -27,6 +29,14 @@ export default class ListEmployeeComponent extends Component {
     addEmployee(){
         // pushing into history like this works similar to a redirect
         this.props.history.push('/add-employee');
+    }
+
+    editEmployee(id){
+        this.props.history.push(`/update-employee/${id}`);
+    }
+
+    deleteEmployee(id){
+        this.props.history.push(`/delete-employee/${id}`);
     }
 
     render() {
@@ -54,6 +64,23 @@ export default class ListEmployeeComponent extends Component {
                                         <td>{employee.firstName}</td>
                                         <td>{employee.lastName}</td>
                                         <td>{employee.emailId}</td>
+                                        <td>
+                                            <button 
+                                                className="btn btn-info"
+                                                onClick={() => this.editEmployee(employee.id)}
+                                                style={{ width: '40%', marginRight: '5%' }}
+                                            >   
+                                                Update
+                                            </button>
+                                            <button 
+                                                className="btn btn-danger" 
+                                                onClick={() => this.deleteEmployee(employee.id)}
+                                                style={{ width: '40%', marginLeft: '10%' }}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                        
                                     </tr>
                                 ))
                             }

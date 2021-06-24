@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import EmployeeService from '../services/EmployeeService';
 
-class CreateEmployee extends Component {
+class UpdateEmployee extends Component {
     constructor(props){
         super(props);
 
@@ -12,14 +12,26 @@ class CreateEmployee extends Component {
         }
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.saveEmployee = this.saveEmployee.bind(this);
+        this.updateEmployee = this.updateEmployee.bind(this);
+    }
+
+    componentDidMount(){
+        EmployeeService.getEmployeeById(this.props.match.params.id)
+            .then(res => {
+                let employee = res.data;
+                this.setState({
+                    firstName: employee.firstName,
+                    lastName: employee.lastName,
+                    emailId: employee.emailId
+                })
+            })
     }
 
     onChangeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    saveEmployee = e => {
+    updateEmployee = e => {
         e.preventDefault();
 
         let employee = {
@@ -28,14 +40,15 @@ class CreateEmployee extends Component {
             emailId: this.state.emailId,
         }
         console.log('employee: ' + JSON.stringify(employee));
-        EmployeeService.createEmployee(employee).then(res => {
-            this.props.history.push('/employees')
-        })
+        EmployeeService.updateEmployee(this.props.match.params.id, employee)
+        this.props.history.push('/')
     }
 
     cancel = e => {
         this.props.history.push('/employees');
     }
+
+    
 
     render() {
         return (
@@ -43,7 +56,7 @@ class CreateEmployee extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
-                            <h3 className="text-center">Add Employee</h3>
+                            <h3 className="text-center">Update Employee</h3>
                             <div className="card-body">
                                 <form>
                                     <div className="form-group">
@@ -73,7 +86,7 @@ class CreateEmployee extends Component {
                                         />
                                     </div>
 
-                                    <button className="btn btn-success" onClick={this.saveEmployee}>Save</button>
+                                    <button className="btn btn-success" onClick={this.updateEmployee}>Update</button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{ marginLeft: "10px" }}>Cancel</button>
                                 </form>
                             </div>
@@ -86,4 +99,4 @@ class CreateEmployee extends Component {
     }
 }
 
-export default CreateEmployee;
+export default UpdateEmployee;
