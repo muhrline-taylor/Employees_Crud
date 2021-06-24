@@ -36,6 +36,14 @@ public class Employee {
 		this.emailId = emailId;
 	}
 	
+	public Employee(Long id, String firstName, String lastName, String emailId) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+	}
+	
 //	GETTERS AND SETTERS
 	
 	public long getId() {
