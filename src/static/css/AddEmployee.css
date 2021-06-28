@@ -1,0 +1,31 @@
+.addEmployee {
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+}
+
+.addEmployeeHeader {
+    height: 7vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.addEmployeeBody {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.addEmployeeBody__input {
+    height: 6vh;
+    width: 19vw;
+    font-size: 2.5vh;
+    text-align: center;
+}
+
+.addEmployeeFooter {
+    height: 6vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
