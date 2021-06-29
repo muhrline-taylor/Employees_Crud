@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,9 +23,11 @@ public class Employee {
 	private Long id;
 	
 	@Column(name="first_name")
+	@Size(min=2, message="First Name cannot be less than 2 characters")
 	private String firstName;
 	
 	@Column(name="last_name")
+	@Size(min=2, message="Last Name cannot be less than 2 characters")
 	private String lastName;
 	
 	@Column(name="email")
