@@ -11,7 +11,8 @@ function EmployeeList({  }) {
             .then(res => {
                 setEmployees(res.data)
             })
-    },[])
+    },[employees])
+
 
     return (
         <div className="employeeList">
@@ -43,14 +44,14 @@ function EmployeeList({  }) {
                                 <td className="employeeList__tableEntry">
 
                                     <Link 
-                                        to={`employees/${employee.id}/edit`}
+                                        to={`${employee.id}/edit`}
                                         className="employeeList__tableEntryLink"
                                     >
                                         Edit
                                     </Link>
 
                                     <Link 
-                                        to={`employees/${employee.id}/edit`}
+                                        to={`${employee.id}/delete`}
                                         className="employeeList__tableEntryLink"
                                     >
                                         Delete

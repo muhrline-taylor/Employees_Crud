@@ -14,10 +14,12 @@ class EmployeeService {
         return axios.get(`${EMPLOYEE_API_BASE_URL}/${id}`);
     }
 
-    
-
     createEmployee(reqBody){
         return axios.post(`${EMPLOYEE_API_BASE_URL}/new`, reqBody);
+    }
+
+    deleteEmployee(id){
+        return axios.delete(`${EMPLOYEE_API_BASE_URL}/${id}`);
     }
 
 
@@ -30,14 +32,19 @@ class EmployeeService {
     }
 
     validateNewEmployee(reqBody){
-        console.log("into validateNewEmployee")
-        console.log(reqBody)
-        console.log(this.validateEmail(reqBody.email))
+        var errors;
         if(this.validateEmail(reqBody.email) === true){
             if(reqBody.firstName !== "" && reqBody.lastName !== ""){
-                console.log("valid form")
                 this.createEmployee(reqBody)
+                errors = "none"
+                return errors
+            } else {
+                errors = "Please enter a valid email"
+                return errors
             }
+        } else {
+            errors = "First and last names must be at least 2 characters each"
+            return errors
         }
     }
 

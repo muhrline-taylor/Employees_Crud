@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "../static/css/AddEmployee.css";
 import EmployeeService from '../services/EmployeeService';
+import { useHistory } from 'react-router-dom';
 
 function AddEmployee() {
     const [addEmployeeForm, setAddEmployeeForm] = useState({
@@ -8,6 +9,8 @@ function AddEmployee() {
         lastName: "",
         email: ""
     });
+    const [errors, setErrors] = useState("");
+    const history = useHistory();
 
     const changeHandler = e => {
         setAddEmployeeForm({
@@ -18,7 +21,15 @@ function AddEmployee() {
 
     const submitHandler = e => {
         e.preventDefault();
-        EmployeeService.validateNewEmployee(addEmployeeForm)
+        var rawErrors = EmployeeService.validateNewEmployee(addEmployeeForm)
+        if(rawErrors !== "none"){
+            setErrors({
+                ...errors,
+                rawErrors
+            })
+        } else {
+            history.push("./")
+        }
     }
 
     return (
@@ -26,6 +37,15 @@ function AddEmployee() {
             <form>
                 <div className="addEmployeeHeader">
                     <h1>Create Employee</h1>
+                    {
+                        errors.rawErrors ?
+                        <p style={{
+                            color: 'red'
+                        }}>{errors.rawErrors}</p>
+                        :""
+                    }
+                    
+                    <p></p>
                 </div>
                 
                 <div className="addEmployeeBody">

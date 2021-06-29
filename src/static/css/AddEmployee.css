@@ -5,10 +5,11 @@
 }
 
 .addEmployeeHeader {
-    height: 7vh;
+    height: 9vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
 }
 
 .addEmployeeBody {

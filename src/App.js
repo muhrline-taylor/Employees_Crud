@@ -11,6 +11,8 @@ import EmployeeList from './components/EmployeeList';
 import AddEmployee from './components/AddEmployee';
 import ViewEmployee from './components/ViewEmployee';
 import EditEmployee from './components/EditEmployee';
+import { Redirect } from 'react-router';
+import DeleteEmployee from './components/DeleteEmployee';
 
 function App() {
   
@@ -28,7 +30,7 @@ function App() {
             <Route exact path="/employees/new" component={AddEmployee}></Route>
             <Route exact path="/employees/:id" component={ViewEmployee}></Route>
             <Route path="/employees/:id/edit" component={EditEmployee}></Route>
-            
+            <Route path="/employees/:id/delete" component={DeleteEmployee}></Route>
             
           </Switch>
         </div>
